@@ -4,6 +4,7 @@ import android.app.Activity
 import android.graphics.drawable.ColorDrawable
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
+import android.view.WindowManager
 
 class LoadingDialog private constructor(internal var activity: Activity) {
 
@@ -17,11 +18,13 @@ class LoadingDialog private constructor(internal var activity: Activity) {
             try {
                 alertDialog!!.window!!.setBackgroundDrawable(ColorDrawable(0))
                 alertDialog!!.window!!.attributes.windowAnimations = R.style.DialogAnimations
+                alertDialog!!.window!!.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
             } catch (e: Exception) {
 
             }
-
             alertDialog!!.show()
+            alertDialog!!.window!!.decorView.systemUiVisibility = activity.window.decorView.systemUiVisibility
+            alertDialog!!.window!!.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
             if (loadingView != null)
                 loadingView!!.start()
         }
