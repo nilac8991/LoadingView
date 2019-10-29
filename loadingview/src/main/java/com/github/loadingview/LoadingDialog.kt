@@ -31,6 +31,10 @@ class LoadingDialog private constructor(internal var activity: Activity) {
         return this
     }
 
+    fun isShowing(): Boolean {
+        return isShowing
+    }
+
     fun hide(): LoadingDialog {
         isShowing = false
         if (loadingView != null)
